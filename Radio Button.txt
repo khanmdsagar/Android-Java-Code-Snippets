@@ -1,0 +1,32 @@
+<LinearLayout
+           android:gravity="center"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <RadioGroup
+               android:id="@+id/radioGroup"
+               android:orientation="horizontal"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content">
+
+               <RadioButton
+                   android:id="@+id/male"
+                   android:onClick="checkButton"
+                   android:text="Male "
+                   android:textSize="18sp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <RadioButton
+                   android:id="@+id/female"
+                   android:onClick="checkButton"
+                   android:layout_marginLeft="10dp"
+                   android:text="Female "
+                   android:textSize="18sp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   tools:ignore="InvalidId" />
+
+           </RadioGroup>
+
+       </LinearLayout>

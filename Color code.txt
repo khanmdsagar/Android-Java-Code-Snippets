@@ -1,0 +1,2 @@
+main: #ff242f
+primary: #e40c17

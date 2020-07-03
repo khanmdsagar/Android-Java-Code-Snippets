@@ -1,0 +1,40 @@
+
+        sTime.setOnClickListener(new View.OnClickListener() {
+
+            Calendar calendar = Calendar.getInstance();
+            int hour = calendar.get(Calendar.HOUR);
+            int minute = calendar.get(Calendar.MINUTE);
+
+            @Override
+            public void onClick(View v) {
+
+                timePickerDialog = new TimePickerDialog(addClassRoutine.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                        String format;
+
+                        if (hourOfDay == 0){
+                            hourOfDay += 12;
+                            format = "AM";
+                            sTime.setText(hourOfDay + ":" + minute + " " + format);
+                        }
+                        else if (hourOfDay == 12){
+                            format = "PM";
+                            sTime.setText(hourOfDay + ":" + minute + " " + format);
+                        }
+                        else if(hourOfDay > 12){
+                            hourOfDay -= 12;
+                            format = "PM";
+                            sTime.setText(hourOfDay + ":" + minute + " " + format);
+                        }else{
+                            format = "AM";
+                            sTime.setText(hourOfDay + ":" + minute + " " + format);
+                        }
+                    }
+                },hour,minute,false);
+                timePickerDialog.show();
+            }
+        });
+
+      

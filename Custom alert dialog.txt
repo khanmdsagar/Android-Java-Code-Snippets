@@ -1,0 +1,56 @@
+ //Alert Dialog Update and Delete
+    public void showDialog(final String id, String name){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.update_dialog,null);
+
+        builder.setView(dialogView);
+
+        Button delete = dialogView.findViewById(R.id.delete);
+        Button update = dialogView.findViewById(R.id.update);
+        final EditText updateN = dialogView.findViewById(R.id.updateN);
+        final Spinner updateG = dialogView.findViewById(R.id.updateG);
+
+        builder.setTitle(name);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                databaseReference = FirebaseDatabase.getInstance().getReference("dataRoot").child(id);
+
+                databaseReference.removeValue();
+
+                FancyToast.makeText(DataView.this, "Deleted Successfully!",
+                        FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
+                alertDialog.dismiss();
+            }
+        });
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String n, g;
+                n = updateN.getText().toString();
+                g = updateG.getSelectedItem().toString();
+
+                databaseReference = FirebaseDatabase.getInstance().getReference("dataRoot").child(id);
+
+                if (TextUtils.isEmpty(n)) {
+                    updateN.setError("Please Enter a Name");
+                } else {
+                    GetterSetter getterSetter = new GetterSetter(id, n, g);
+
+                    databaseReference.setValue(getterSetter);
+
+                    FancyToast.makeText(DataView.this, "Updated Successfully!",
+                            FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
+                    alertDialog.dismiss();
+                }
+            }
+        });

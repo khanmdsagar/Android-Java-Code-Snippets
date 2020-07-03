@@ -1,0 +1,2 @@
+final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
+mp.start();

@@ -1,0 +1,2 @@
+android:foreground="?android:attr/selectableItemBackground"
+android:clickable="true"

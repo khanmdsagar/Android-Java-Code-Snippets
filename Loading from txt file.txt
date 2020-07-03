@@ -1,0 +1,22 @@
+poem1.setMovementMethod(new ScrollingMovementMethod());
+
+        String data = "";
+
+        StringBuffer stringBuffer = new StringBuffer();
+
+        InputStream is = this.getResources().openRawResource(R.raw.ananta_prem);
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+        if(is!=null){
+            try {
+                while ((data = reader.readLine()) !=null){
+                    stringBuffer.append(data+"n");
+                }
+                poem1.setText(stringBuffer);
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }

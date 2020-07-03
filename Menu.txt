@@ -1,0 +1,53 @@
+//menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main,menu);
+        return true;
+    }
+
+    // menu item clicked
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if(id==R.id.item1){
+            Intent intent = new Intent(MainActivity.this,Settings.class);
+            startActivity(intent);
+            return true;
+        }
+        return true;
+    }
+
+
+..............................................
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.option_menu, menu);
+
+        return true;
+    }//end onCreateOptionsMenu
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.seeAll:
+                startActivity(new Intent(Home.this, SeeData.class));
+                return true;
+
+            case R.id.logOut:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(Home.this, MainActivity.class));
+                finish();
+                return true;
+
+            case R.id.addWord:
+                startActivity(new Intent(Home.this, Wordadd.class));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }//end onOptionsItemSelected

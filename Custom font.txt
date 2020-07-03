@@ -1,0 +1,4 @@
+Typeface typeface;   
+
+typeface = Typeface.createFromAsset(getAssets(),"font/Charm-Regular.ttf");
+        text.setTypeface(typeface);

@@ -1,0 +1,44 @@
+#java class
+ @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Dr. Khan Md Sagar")
+                .setMessage("Qualifications: MBBS (DU)\nChamber: Konika Diagnostic Centre\nService Time: 5pm to 1am\nCall for serial: 01855555555")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+        return builder.create();
+    }
+
+
+or,,
+AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Error!")
+                            .setMessage("Flash Light Can't be Opened!")
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+
+#main class
+
+button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialog();
+            }
+        });
+
+
+  public void openDialog(){
+
+        doctor1 d1 = new doctor1();
+        d1.show(getSupportFragmentManager(),"doctor1");
+    }

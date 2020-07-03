@@ -1,0 +1,22 @@
+ad id: ca-app-pub-6309160786613129~7258817119
+unit id: ca-app-pub-6309160786613129/1768593385
+
+user permission INTERNET
+user permission NETWORK STATE
+
+compile 'com.google.android.gms:play-services-ads:18.1.1'
+
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        </com.google.android.gms.ads.AdView>
+
+ AdRequest adRequest = new AdRequest.Builder().build();
+ adView.loadAd(adRequest);

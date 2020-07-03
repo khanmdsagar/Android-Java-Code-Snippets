@@ -1,0 +1,35 @@
+Button button1; 
+
+button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+
+                try {
+                    wallpaperManager.setResource(+ R.drawable.wall_one);
+                }
+
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+<ImageView
+        android:layout_marginTop="30dp"
+        android:src="@drawable/wall_one"
+        android:layout_width="match_parent"
+        android:layout_height="400dp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="32.5dp"
+        android:text="Set as Wallpaper"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />

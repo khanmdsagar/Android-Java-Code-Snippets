@@ -1,0 +1,3 @@
+String[] day = {"Sunday","Monday","Tuesday","Wednesday","Thrusday"};
+ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,day);
+days.setAdapter(arrayAdapter);

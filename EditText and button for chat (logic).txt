@@ -1,0 +1,23 @@
+        editText1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                String a = editText1.getText().toString();
+
+                imageButton1.setImageResource(R.drawable.sendicon);
+
+               if (TextUtils.isEmpty(a)){
+                   imageButton1.setImageResource(R.drawable.likeicon);
+               }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });

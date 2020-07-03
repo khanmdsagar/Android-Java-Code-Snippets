@@ -1,0 +1,74 @@
+    RecyclerView routineView;
+
+    DatabaseReference refOne;
+
+    FirebaseRecyclerOptions<classRoutineModel> options;
+    FirebaseRecyclerAdapter<classRoutineModel,RoutineHolder> adapter;
+
+
+        routineView = findViewById(R.id.routineView);
+        routineView.setHasFixedSize(true);
+
+        //recycler animation
+        DefaultItemAnimator animator = new DefaultItemAnimator();
+        animator.setAddDuration(500);
+        routineView.setItemAnimator(animator);
+
+        getSupportActionBar().setTitle("Class Routine");
+
+        //layout manager
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        routineView.setLayoutManager(linearLayoutManager);
+
+
+refOne = FirebaseDatabase.getInstance().getReference("Class Routine").child("Sunday");
+
+        //getting routine
+        options = new FirebaseRecyclerOptions.Builder<classRoutineModel>()
+                .setQuery(refOne,classRoutineModel.class).build();
+
+        adapter = new FirebaseRecyclerAdapter<classRoutineModel, RoutineHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull RoutineHolder holder, int position, @NonNull classRoutineModel model) {
+
+                holder.subName.setText(model.getSubjectName());
+                holder.sirName.setText(model.getTeacherName());
+                holder.endTime.setText(model.geteTime());
+                holder.startTime.setText(model.getsTime());
+            }
+
+            @NonNull
+            @Override
+            public RoutineHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.routine_layout,viewGroup,false);
+                return new RoutineHolder(view);
+            }
+        };
+
+        adapter.startListening();
+        routineView.setAdapter(adapter);
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (adapter!=null)
+            adapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        if (adapter!=null)
+            adapter.stopListening();
+        super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adapter!=null)
+            adapter.startListening();
+    }

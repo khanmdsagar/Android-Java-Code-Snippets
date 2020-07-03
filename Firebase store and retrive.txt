@@ -1,0 +1,116 @@
+MainActivity
+    EditText artist;
+    Spinner generes;
+    Button addartist,viewArtist;
+
+    DatabaseReference databaseReference;
+
+artist = findViewById(R.id.artist);
+        generes = findViewById(R.id.generes);
+        addartist = findViewById(R.id.addArtist);
+        viewArtist = findViewById(R.id.viewArtist);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("artists");
+
+ //Start View Activity
+        viewArtist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,viewArtist.class));
+            }
+        });
+
+
+  //method for adding artist
+    public void includeArtist(){
+
+        String a,b;
+
+        a = artist.getText().toString();
+        b = generes.getSelectedItem().toString();
+
+        if (!TextUtils.isEmpty(a)){
+
+        String id = databaseReference.push().getKey();
+
+        ModelClass modelClass = new ModelClass(id,a,b);
+
+        //setting value
+        databaseReference.child(id).setValue(modelClass);
+
+        Toast.makeText(this, "Artist Added", Toast.LENGTH_SHORT).show();
+
+        }else{
+            Toast.makeText(this, "Please Add Name", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+ArtistList
+    private Activity context;
+    private List<ModelClass> artistList;
+
+
+//create constructor
+
+    @NonNull
+    @Override
+    public View getView(int position,  View convertView,  ViewGroup parent) {
+
+        LayoutInflater inflater = context.getLayoutInflater();
+
+        View listViewItem = inflater.inflate(R.layout.list_layout,null,true);
+
+        TextView textViewName = listViewItem.findViewById(R.id.textViewname);
+        TextView textViewGenere = listViewItem.findViewById(R.id.textViewgenere);
+
+        ModelClass modelClass = artistList.get(position);
+
+
+        textViewName.setText(modelClass.getArtistName());
+        textViewGenere.setText(modelClass.getGeneres());
+
+        return listViewItem;
+    }
+
+
+ViewActivity
+
+    ListView listView;
+    DatabaseReference databaseReference;
+    List<ModelClass> artistList;
+
+        listView = findViewById(R.id.listView);
+        artistList = new ArrayList<>();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("artists");
+
+
+//Reading Data
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                artistList.clear();
+
+                for (DataSnapshot artistSnapshot : dataSnapshot.getChildren()){
+
+                    ModelClass modelClass = artistSnapshot.getValue(ModelClass.class);
+
+                    artistList.add(modelClass);
+
+                    ArtistList adapter = new ArtistList(viewArtist.this,artistList);
+                    listView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
