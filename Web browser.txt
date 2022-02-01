@@ -1,4 +1,5 @@
 <uses-permission android:name="android.permission.INTERNET"/>
+android:usesCleartextTraffic="true"
 
 WebView webView;
 webView = (WebView) findViewById(R.id.webView);
